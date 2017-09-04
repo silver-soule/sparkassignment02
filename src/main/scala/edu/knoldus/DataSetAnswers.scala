@@ -47,5 +47,4 @@ object DataSetAnswers extends App {
   val winnerUDF = udf(winner)
   homeInfoDataSet.map(data=> MinimalData(data.HomeTeam,data.FTR,data.AwayTeam)).withColumn("winner",winnerUDF(col("HomeTeam"),col("awayTeam"),col("FTR")))
     .groupBy("winner").count().na.drop().orderBy(desc("count")).show(10)
-
 }
